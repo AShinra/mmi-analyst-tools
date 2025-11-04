@@ -11,18 +11,18 @@ def main(username, rights):
 
     with st.sidebar:
         if rights=='admin':
-            options_list=['Product Management', 'Stock Management', 'Tracking & Reports', 'Search & Filters', 'User Management']
-            icons_list=['box2-fill', 'bag-fill', 'body-text', 'search', 'people-fill']
+            options_list=['User Management']
+            icons_list=['people-fill']
         elif rights=='sub-admin':
-            options_list=['Entry', 'Archive', 'Summary', 'Client Management']
-            icons_list=['pencil-square', 'archive', 'journals', 'gear']
+            options_list=[]
+            icons_list=[]
         else:
-            options_list=['Archive', 'Summary']
-            icons_list=['archive', 'journals']
+            options_list=[]
+            icons_list=[]
 
         st.sidebar.header(f':red[Welcome :blue[*{username.title()}*]] 👤')
         selected = option_menu(
-            menu_title='Warehouse Inventory',
+            menu_title='MARS V1.0',
             menu_icon='list-columns',
             options=options_list,
             icons=icons_list
@@ -30,15 +30,6 @@ def main(username, rights):
         btn_clearcache = st.button('**Clear Cache**', use_container_width=True)
     
     # client_list = []
-    # if selected=='Product Management':
-    #     product_management()
-            
-    # elif selected=='Stock Management':
-    #     stock_management()
-        
-    # elif selected=='Tracking & Reports':
-    #     tracking_reports()
-    
     if selected=='User Management':
         user_management()
 
