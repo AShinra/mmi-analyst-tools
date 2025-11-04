@@ -12,7 +12,7 @@ def get_client():
 @st.cache_resource
 def connect_mongodb():
     client = get_client()
-    return client['jfm_ims']
+    return client['mars']
 
 @st.cache_resource
 def get_collection(collection_name):
