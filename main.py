@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     st.set_page_config(
         layout="wide",
-        page_title='Joseph Feeding Mission - Inventory Management System')
+        page_title='MMI Analytics & Reporting System')
     
     # hide streamlit toolbar
     st.markdown("""<style>[data-testid="stToolbar"] {display: none;}</style>""", unsafe_allow_html=True)
