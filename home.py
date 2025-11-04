@@ -4,7 +4,7 @@ from common import get_client
 # from product_mgt import product_management
 # from stock_mgt import stock_management
 # from tracking_reports import tracking_reports
-# from users_management import user_management
+from users_management import user_management
 
 
 def main(username, rights):
@@ -39,8 +39,8 @@ def main(username, rights):
     # elif selected=='Tracking & Reports':
     #     tracking_reports()
     
-    # elif selected=='User Management':
-    #     user_management()
+    if selected=='User Management':
+        user_management()
 
 
         
