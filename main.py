@@ -39,7 +39,6 @@ if __name__ == '__main__':
     
     ph = PasswordHasher()
     user_collection = get_collection('users')
-    st.write(user_collection)
         
     if st.session_state.logged_in:
         main(st.session_state.username, st.session_state.rights)
