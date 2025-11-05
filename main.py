@@ -38,10 +38,7 @@ if __name__ == '__main__':
         st.session_state.rights = ''
     
     ph = PasswordHasher()
-    user_collection = get_collection('users_analysts')
-    documents = user_collection.find()
-    for document in documents:
-        st.write(document)
+    user_collection = get_collection('users_analysts')    
         
     if st.session_state.logged_in:
         main(st.session_state.username, st.session_state.rights)
