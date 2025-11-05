@@ -11,8 +11,8 @@ def main(fname, rights):
 
     with st.sidebar:
         if rights=='admin':
-            options_list=['User Management']
-            icons_list=['people-fill']
+            options_list=['Report Tools', 'User Management']
+            icons_list=['wrench-adjustable', 'people-fill']
         elif rights=='sub-admin':
             options_list=[]
             icons_list=[]
