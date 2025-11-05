@@ -49,7 +49,7 @@ def add_user():
 
 def edit_user():
     # edit user
-    users = get_collection('users')
+    users = get_collection('users_analysts')
 
     # get the users from the db.users
     documents = users.find()
