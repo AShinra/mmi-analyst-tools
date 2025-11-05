@@ -22,7 +22,7 @@ def main(fname, rights):
 
         st.sidebar.header(f':red[Welcome :blue[*{fname.title()}*]] 👤')
         selected = option_menu(
-            menu_title='MARS V1.0',
+            menu_title='MARSv1.0',
             menu_icon='list-columns',
             options=options_list,
             icons=icons_list
