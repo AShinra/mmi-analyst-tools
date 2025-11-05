@@ -23,6 +23,16 @@ if __name__ == '__main__':
     st.markdown("""<style>[data-testid="stSidebarHeader"] {height: 1rem;}</style>""", unsafe_allow_html=True)
     st.markdown("""<style>.stSidebar.st-emotion-cache-1legitb {background-color: black;}</style>""", unsafe_allow_html=True)
     
+    # Global Title
+    st.markdown(
+    """
+    <h2 style='text-align: center; color: white; background-color:#262730; padding:10px; border-radius:10px;'>
+        🛰️ Monitoring and Reporting System
+    </h2>
+    """,
+    unsafe_allow_html=True)
+
+
     # try:
     #     st.sidebar.image(get_logo())
     # except FileNotFoundError:

@@ -5,14 +5,15 @@ from common import get_client
 # from stock_mgt import stock_management
 # from tracking_reports import tracking_reports
 from users_management import user_management
+from tools.cleaner import cleaner
 
 
 def main(fname, rights):
 
     with st.sidebar:
         if rights=='admin':
-            options_list=['Report Tools', 'User Management']
-            icons_list=['wrench-adjustable', 'people-fill']
+            options_list=['Report Tools', 'Settings']
+            icons_list=['wrench-adjustable', 'gear']
         elif rights=='sub-admin':
             options_list=[]
             icons_list=[]
@@ -27,11 +28,30 @@ def main(fname, rights):
             options=options_list,
             icons=icons_list
         )
+        
+        if selected=='Report Tools':
+            sub_selected = option_menu(
+                menu_title=None,
+                options=['Cleaner'],
+                icons=['magic']
+        )
+        
+        if selected=='Settings':
+            sub_selected = option_menu(
+                menu_title=None,
+                options=['User Management'],
+                icons=['people-fill']
+        )
+            
+
         btn_clearcache = st.button('**Clear Cache**', use_container_width=True)
     
-    # client_list = []
-    if selected=='User Management':
+    if sub_selected=='User Management':
         user_management()
+    
+    if sub_selected=='Cleaner':
+        cleaner()
+    
 
 
         
