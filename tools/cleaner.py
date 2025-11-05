@@ -65,5 +65,4 @@ def cleaner():
                         data=processed_data,
                         file_name="cleaned_data.xlsx",
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    # else:
-    #     st.warning('Please select a task to process!!!')
+    

@@ -4,5 +4,11 @@ backgroundColor="#000000"
 secondaryBackgroundColor="#35026eff"
 textColor="#ffffff"
 font="sans serif"
+
 [server]
 maxUploadSize=500
+
+[ui]
+layout="centered"
+page_title="MMI Analytics & Reporting System"
+page_icon="📊"

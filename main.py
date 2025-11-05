@@ -12,9 +12,9 @@ if __name__ == '__main__':
     </style>"""
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)    
 
-    st.set_page_config(
-        layout="wide",
-        page_title='MMI Analytics & Reporting System')
+    # st.set_page_config(
+    #     layout="wide",
+    #     page_title='MMI Analytics & Reporting System')
     
     # hide streamlit toolbar
     st.markdown("""<style>[data-testid="stToolbar"] {display: none;}</style>""", unsafe_allow_html=True)
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     st.markdown(
     """
     <h2 style='text-align: center; color: white; background-color:#262730; padding:10px; border-radius:10px;'>
-        🛰️ Monitoring and Reporting System
+        📊 MMI Analytics & Reporting System
     </h2>
     """,
     unsafe_allow_html=True)
