@@ -9,6 +9,6 @@ font="sans serif"
 maxUploadSize=500
 
 [ui]
-layout="centered"
+layout="wide"
 page_title="MMI Analytics & Reporting System"
 page_icon="📊"
