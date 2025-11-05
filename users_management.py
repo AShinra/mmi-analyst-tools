@@ -5,7 +5,7 @@ from common import has_upper_and_number, page_title, get_collection
 
 def add_user():
     # add user
-    users = get_collection('users')
+    users = get_collection('users_analysts')
 
     ph = PasswordHasher()  # default parameters are sensible; tune if needed
     
