@@ -7,7 +7,6 @@ from io import BytesIO
 @st.cache_resource
 def get_client():
     client = MongoClient(st.secrets["mongo"]["uri"])
-    st.write(st.secrets["mongo"]["uri"])
     return client
 
 @st.cache_resource
