@@ -17,8 +17,8 @@ def main(fname, rights):
             options_list=[]
             icons_list=[]
         else:
-            options_list=[]
-            icons_list=[]
+            options_list=['Report Tools']
+            icons_list=['wrench-adjustable']
 
         st.sidebar.header(f':red[Welcome :blue[*{fname.title()}*]] 👤')
         selected = option_menu(
