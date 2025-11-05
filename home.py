@@ -7,7 +7,7 @@ from common import get_client
 from users_management import user_management
 
 
-def main(username, rights):
+def main(fname, rights):
 
     with st.sidebar:
         if rights=='admin':
@@ -20,7 +20,7 @@ def main(username, rights):
             options_list=[]
             icons_list=[]
 
-        st.sidebar.header(f':red[Welcome :blue[*{username.title()}*]] 👤')
+        st.sidebar.header(f':red[Welcome :blue[*{fname.title()}*]] 👤')
         selected = option_menu(
             menu_title='MARS V1.0',
             menu_icon='list-columns',

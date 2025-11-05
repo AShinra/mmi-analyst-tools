@@ -37,11 +37,14 @@ if __name__ == '__main__':
     if 'rights' not in st.session_state:
         st.session_state.rights = ''
     
+    if 'fname' not in st.session_state:
+        st.session_state.fname = ''
+    
     ph = PasswordHasher()
     user_collection = get_collection('users_analysts')    
         
     if st.session_state.logged_in:
-        main(st.session_state.username, st.session_state.rights)
+        main(st.session_state.fname, st.session_state.rights)
         with st.sidebar:
             if st.button('**Log Out**', use_container_width=True):
                 st.session_state.logged_in = False
@@ -72,6 +75,7 @@ if __name__ == '__main__':
                     st.session_state.logged_in = True
                     st.session_state.username = username
                     st.session_state.rights = doc['rights']
+                    st.session_state.fname = doc['name']
                     st.rerun()
                 except Exception:
                     st.sidebar.error("Wrong password")
