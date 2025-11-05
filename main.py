@@ -12,9 +12,10 @@ if __name__ == '__main__':
     </style>"""
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)    
 
-    # st.set_page_config(
-    #     layout="wide",
-    #     page_title='MMI Analytics & Reporting System')
+    st.set_page_config(
+        layout="wide",
+        page_title="MMI Analytics & Reporting System",
+        page_icon="📊")
     
     # hide streamlit toolbar
     st.markdown("""<style>[data-testid="stToolbar"] {display: none;}</style>""", unsafe_allow_html=True)
