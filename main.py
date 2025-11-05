@@ -38,7 +38,7 @@ if __name__ == '__main__':
         st.session_state.rights = ''
     
     ph = PasswordHasher()
-    user_collection = get_collection('users')
+    user_collection = get_collection('users_analysts')
     documents = user_collection.find()
     for document in documents:
         st.write(document)
