@@ -11,20 +11,20 @@ def remove_duplicates(df, selected_columns):
 def client_focus(df, selected_keywords):
     # creates a focus column based on number of clients mentioned in title and content
     for index, row in df.iterrows():
-        title_score = 0
-        content_score = 0
-        title_text = row['Title'].lower()
-        content_text = row['Content'].lower()
+        in_title_score = 0
+        in_content_score = 0
+        title_text = str(row['Title']).lower()
+        content_text = str(row['Content']).lower()
 
         for keyword in selected_keywords:
             # search in title column
             if keyword.lower() in title_text:
-                title_score += 1
+                in_title_score += 1
             
             # search in content column
-            content_score += content_text.count(keyword)
+            in_content_score += content_text.count(keyword)
 
-        if title_score>=1 or content_score>=3:            
+        if in_title_score>=1 or in_content_score>=3:            
             df.loc[index, 'Focus'] = 'Main'
         else:
             df.loc[index, 'Focus'] = 'Mention'
