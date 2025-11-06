@@ -106,6 +106,23 @@ def cleaner():
                     with col4:
                         with st.container(border=True):
                             st.subheader('Favorability')
+                    
+                    cola, colb, colc, cold = st.columns(4)
+                    with cola:
+                        with st.container(border=True):
+                            st.subheader('Function5')
+                    
+                    with colb:
+                        with st.container(border=True):
+                            st.subheader('Function6')
+                    
+                    with colc:
+                        with st.container(border=True):
+                            st.subheader('Function7')
+                    
+                    with cold:
+                        with st.container(border=True):
+                            st.subheader('Function8')
 
     
 
