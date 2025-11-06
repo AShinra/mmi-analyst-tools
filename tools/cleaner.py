@@ -53,7 +53,8 @@ def cleaner():
 
         # get list of keywords
         list_keywords = (df['Keywords'].str.split(',').explode().reset_index(drop=True)).to_list()
-        list_keywords = list(dict.fromkeys(list_keywords))
+        # list_keywords = list(dict.fromkeys(list_keywords))
+        list_keywords = sorted(set(list_keywords))
         
         with col11:
             with st.container(border=True):
