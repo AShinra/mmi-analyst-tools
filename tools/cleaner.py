@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+from common import input_raw_file
 
 def remove_duplicates(df, selected_columns):
     # removes duplicates from the raw file
@@ -41,10 +42,7 @@ def cleaner():
     col11, col12 = st.columns(2)
     with col11:
         with st.container(border=True):
-            raw_file = st.file_uploader(
-                label='Upload Raw File',
-                type=['xls', 'xlsx']
-            )
+            raw_file = input_raw_file()
 
     if raw_file:
         df = pd.read_excel(raw_file)

@@ -4,6 +4,14 @@ from PIL import Image
 import requests
 from io import BytesIO
 
+@st.cache_data
+def input_raw_file():
+    raw_file = st.file_uploader(
+        label='Upload Raw File',
+        type=['xls', 'xlsx'])
+    
+    return raw_file
+
 @st.cache_resource
 def get_client():
     client = MongoClient(st.secrets["mongo"]["uri"])
