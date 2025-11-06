@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
-from common import input_raw_file
 
 def remove_duplicates(df, selected_columns):
     # removes duplicates from the raw file
