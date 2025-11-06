@@ -98,6 +98,14 @@ def cleaner():
 
                             if cb_focus and len(selected_keywords) > 0:
                                 task_status += 1
+                    
+                    with col3:
+                        with st.container(border=True):
+                            st.subheader('Tier')
+                    
+                    with col4:
+                        with st.container(border=True):
+                            st.subheader('Favorability')
 
     
 
