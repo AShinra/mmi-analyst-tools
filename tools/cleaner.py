@@ -13,14 +13,16 @@ def client_focus(df, selected_keywords):
     for index, row in df.iterrows():
         title_score = 0
         content_score = 0
+        title_text = row['Title'].lower()
+        content_text = row['Content'].lower()
+
         for keyword in selected_keywords:
             # search in title column
-            if keyword.lower() in row['Title'].lower():
+            if keyword.lower() in title_text:
                 title_score += 1
             
             # search in content column
-            content_text = row['Content'].lower()
-            content_score = content_text.count(keyword)
+            content_score += content_text.count(keyword)
 
         if title_score>=1 or content_score>=3:            
             df.loc[index, 'Focus'] = 'Main'
