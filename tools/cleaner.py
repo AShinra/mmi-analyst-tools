@@ -99,13 +99,7 @@ def cleaner():
                             task_status += 1
 
     with col12:
-        try:
-            with st.container():
-                st.subheader('Uploaded Dataframe')
-                st.dataframe(df)
-        except:
-            pass
-
+        '''Place other functions here'''
 
     if task_status > 0:
         with st.container():
