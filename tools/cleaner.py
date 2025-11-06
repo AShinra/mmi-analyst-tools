@@ -53,7 +53,7 @@ def cleaner():
                 if btn_process:
                     with st.spinner(text='Processing File',show_time=True):
                         cleaned_df = df.drop_duplicates(subset=selected_columns)
-                        st.write(cleaned_df.shape[0])
+                        st.success(f'{df.shape[0] - cleaned_df.shape[0]} removed rows')
 
                         output = BytesIO()
                         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
@@ -63,6 +63,6 @@ def cleaner():
                         st.download_button(
                         label="📥 Download Cleaned Excel File",
                         data=processed_data,
-                        file_name="cleaned_data.xlsx",
+                        file_name=f"{out_fname}.xlsx",
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     

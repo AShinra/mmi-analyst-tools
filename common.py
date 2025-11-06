@@ -21,7 +21,7 @@ def get_collection(collection_name):
 
 @st.cache_resource
 def get_logo():
-    url = "https://i.ibb.co/RpzG1R1d/JFM-Logo.jpg"
+    url = "https://i.ibb.co/JRW19H4Y/AShinra-Logo.png"
     response = requests.get(url)
     response.raise_for_status()  # Raise an error for bad responses
     return Image.open(BytesIO(response.content))
