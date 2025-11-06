@@ -7,8 +7,3 @@ font="sans serif"
 
 [server]
 maxUploadSize=500
-
-[ui]
-layout="wide"
-page_title="MMI Analytics & Reporting System"
-page_icon="📊"
