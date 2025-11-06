@@ -42,7 +42,9 @@ def cleaner():
     col11, col12 = st.columns(2)
     with col11:
         with st.container(border=True):
-            raw_file = input_raw_file()
+            raw_file = raw_file = st.file_uploader(
+                label='Upload Raw File',
+                type=['xls', 'xlsx'])
 
     if raw_file:
         df = pd.read_excel(raw_file)
