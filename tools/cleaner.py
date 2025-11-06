@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+from common import get_tier_collection
+
 
 @st.cache_data
 def load_file(raw_file):
@@ -35,6 +37,27 @@ def client_focus(df, selected_keywords):
     
     return df
 
+def get_tier(df, collection):
+
+    df['FQDN'] = ''
+    df['TIER'] = 0
+
+    for index, row in df.iterrows():
+        url = row['Article Source']
+        fqdn = url.split('/')[2]
+        fqdn = fqdn.replace('www.', '')
+        df.loc[index, 'FQDN'] = fqdn
+
+        result = collection.find_one({'fqdn':fqdn})
+
+        if result:
+            df.loc[index, 'TIER'] = result['tier']
+        
+    return df    
+
+
+
+
 
 def cleaner():
     
@@ -45,7 +68,7 @@ def cleaner():
     col11, col12 = st.columns(2)
     with col11:
         with st.container(border=True):
-            raw_file = raw_file = st.file_uploader(
+            raw_file = st.file_uploader(
                 label='Upload Raw File',
                 type=['xls', 'xlsx'])
 
@@ -102,6 +125,19 @@ def cleaner():
                     with col3:
                         with st.container(border=True):
                             st.subheader('Tier')
+                            cb_tier = st.checkbox(
+                                label='Add TIER column'
+                            )
+
+                            if cb_tier:
+                                task_status += 1
+                                collection = get_tier_collection()
+                            # documents = collection.find()
+                            # for document in documents:
+                            #     st.write(document)
+                           
+
+
                     
                     with col4:
                         with st.container(border=True):
@@ -140,13 +176,18 @@ def cleaner():
                         cleaned_df = df
                     
                     try:
-                        cleaned_df = client_focus(df, selected_keywords)
+                        cleaned_df2 = client_focus(cleaned_df, selected_keywords)
                     except:
-                        cleaned_df = df
+                        cleaned_df2 = cleaned_df
+
+                    try:
+                        cleaned_df3 = get_tier(cleaned_df2, collection)
+                    except:
+                        cleaned_df3 = cleaned_df2
 
                     output = BytesIO()
                     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-                        cleaned_df.to_excel(writer, index=False, sheet_name='CleanedData')
+                        cleaned_df3.to_excel(writer, index=False, sheet_name='CleanedData')
                     processed_data = output.getvalue()
                 
                     st.download_button(

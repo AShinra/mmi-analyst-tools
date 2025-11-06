@@ -20,6 +20,12 @@ def get_collection(collection_name):
     return db[collection_name]
 
 @st.cache_resource
+def get_tier_collection():
+    client = get_client()
+    db = client['histo']
+    return db['tier']
+
+@st.cache_resource
 def get_logo():
     url = "https://i.ibb.co/JRW19H4Y/AShinra-Logo.png"
     response = requests.get(url)
