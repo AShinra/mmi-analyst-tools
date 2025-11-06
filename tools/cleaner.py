@@ -64,42 +64,42 @@ def cleaner():
                     out_fname = st.text_input(
                         label='Output Filename')
 
-            col1, col2, col3, col4 = st.columns(4)
             if out_fname:
-                with col1:
-                    with st.container(border=True):
-                        st.subheader('Duplicates')
-                        cb_cleaner = st.checkbox(
-                            label='Remove Duplicates',
-                            help='Only the first occurrence will be retained')
-                        
-                        if cb_cleaner:
-                            selected_columns = st.multiselect(
-                                label='Select Columns',
-                                options=df_columns,
-                                help='Select columns for basis of duplication')
-                        
-                        if cb_cleaner and len(selected_columns)>0:
-                            task_status += 1
+                with col12:
+                    col1, col2, col3, col4 = st.columns(4)
+                    with col1:
+                        with st.container(border=True):
+                            st.subheader('Duplicates')
+                            cb_cleaner = st.checkbox(
+                                label='Remove Duplicates',
+                                help='Only the first occurrence will be retained')
+                            
+                            if cb_cleaner:
+                                selected_columns = st.multiselect(
+                                    label='Select Columns',
+                                    options=df_columns,
+                                    help='Select columns for basis of duplication')
+                            
+                            if cb_cleaner and len(selected_columns)>0:
+                                task_status += 1
             
-                with col2:
-                    with st.container(border=True):
-                        st.subheader('Focus')
-                        cb_focus = st.checkbox(
-                            label='Client Based',
-                            help='Creates a column that contains focus on client')
-                        
-                        if cb_focus:
-                            selected_keywords = st.multiselect(
-                                label='Select keyword or Client name',
-                                options=list_keywords,
-                                help='Select keyword to focus')
+                    with col2:
+                        with st.container(border=True):
+                            st.subheader('Focus')
+                            cb_focus = st.checkbox(
+                                label='Client Based',
+                                help='Creates a column that contains focus on client')
+                            
+                            if cb_focus:
+                                selected_keywords = st.multiselect(
+                                    label='Select keyword or Client name',
+                                    options=list_keywords,
+                                    help='Select keyword to focus')
 
-                        if cb_focus and len(selected_keywords) > 0:
-                            task_status += 1
+                            if cb_focus and len(selected_keywords) > 0:
+                                task_status += 1
 
-    with col12:
-        '''Place other functions here'''
+    
 
     if task_status > 0:
         with st.container():
