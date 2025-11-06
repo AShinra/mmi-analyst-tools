@@ -24,10 +24,11 @@ def client_focus(df, selected_keywords):
 
         if title_score>=1 or content_score>=3:
             # st.write(f'title score {title_score}, content score {content_score} - Main')
-            row['Focus'] = 'Main'
+            # row['Focus'] = 'Main'
+            df.loc[index, 'Focus'] = 'Main'
         elif title_score<1 and content_score<3:
             # st.write(f'title score {title_score}, content score {content_score} - Mention')
-            row['Focus'] = 'Mention'
+            df.loc[index, 'Focus'] = 'Mention'
     
     return df
 
