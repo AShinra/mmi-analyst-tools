@@ -101,6 +101,7 @@ def cleaner():
     with col12:
         try:
             with st.container():
+                st.subheader('Uploaded Dataframe')
                 st.dataframe(df)
         except:
             pass
