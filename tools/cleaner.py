@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 from io import BytesIO
 
+@st.cache_data
+def load_file(raw_file):
+    return pd.read_excel(raw_file)
+
 def remove_duplicates(df, selected_columns):
     # removes duplicates from the raw file
     cleaned_df = df.drop_duplicates(subset=selected_columns)
@@ -33,6 +37,7 @@ def client_focus(df, selected_keywords):
 
 
 def cleaner():
+    
     task_status = 0
 
     st.title('File Cleaner')
@@ -45,7 +50,7 @@ def cleaner():
                 type=['xls', 'xlsx'])
 
     if raw_file:
-        df = pd.read_excel(raw_file)
+        df = load_file(raw_file)
 
         # get list of columns
         df_columns = df.columns.to_list()
