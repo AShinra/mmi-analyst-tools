@@ -63,10 +63,11 @@ def cleaner():
     
     task_status = 0
 
-    st.title('File Cleaner')
+    # st.title('🧹Cleaner')
 
-    col11, col12 = st.columns(2)
+    col11, col12 = st.columns([1,2])
     with col11:
+        st.header('🗄️File Handler')
         with st.container(border=True):
             raw_file = st.file_uploader(
                 label='Upload Raw File',
@@ -89,6 +90,7 @@ def cleaner():
 
             if out_fname:
                 with col12:
+                    st.header('🛠️Tools')
                     col1, col2, col3, col4 = st.columns(4)
                     with col1:
                         with st.container(border=True):
