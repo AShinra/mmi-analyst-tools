@@ -4,14 +4,8 @@ from argon2 import PasswordHasher
 from home import main
 import random
 
-@st.cache_data
-def get_random_number():
-    return random.randint(1, 6)
-
 
 if __name__ == '__main__':
-
-    num = get_random_number
 
     hide_streamlit_style = """<style>
     ._profileContainer_gzau3_63{display: none;}
@@ -90,6 +84,7 @@ if __name__ == '__main__':
             if st.button('**Log Out**', use_container_width=True):
                 st.session_state.logged_in = False
                 st.rerun()
+            num = random.randint(1, 6)
             verse, book = bible_verse(num)
             st.markdown(
                 f"""
@@ -112,16 +107,7 @@ if __name__ == '__main__':
             submit_btn = st.button(
                 label='**LOGIN**',
                 use_container_width=True,
-                key='login_submit_btn')
-            verse, book = bible_verse(num)
-            st.markdown(
-                f"""
-                <p style='text-align: left; color: #ccc; font-size: 14px; margin-top: 5px;'>
-                “{verse}”<br>
-                <i>— {book}</i>
-                </p>
-                """,
-                unsafe_allow_html=True)
+                key='login_submit_btn')            
             
 
         if submit_btn:

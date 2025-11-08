@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from common import get_client
+from common import get_client, gradient_line
 # from product_mgt import product_management
 # from stock_mgt import stock_management
 # from tracking_reports import tracking_reports
@@ -23,6 +23,7 @@ def main(fname, rights):
             icons_list=['wrench-adjustable']
 
         st.sidebar.header(f':red[Welcome :blue[*{fname.title()}*]] 👤')
+        gradient_line()
         selected = option_menu(
             menu_title='MARSv1.0',
             menu_icon='list-columns',
