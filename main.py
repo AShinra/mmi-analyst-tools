@@ -2,9 +2,12 @@ import streamlit as st
 from common import get_logo, get_collection, gradient_line, bible_verse
 from argon2 import PasswordHasher
 from home import main
+import random
 
 
 if __name__ == '__main__':
+
+    num = random.randint(1, 6)
 
     hide_streamlit_style = """<style>
     ._profileContainer_gzau3_63{display: none;}
@@ -83,7 +86,7 @@ if __name__ == '__main__':
             if st.button('**Log Out**', use_container_width=True):
                 st.session_state.logged_in = False
                 st.rerun()
-            verse, book = bible_verse()
+            verse, book = bible_verse(num)
             st.markdown(
                 f"""
                 <p style='text-align: left; color: #ccc; font-size: 14px; margin-top: 5px;'>
@@ -106,7 +109,7 @@ if __name__ == '__main__':
                 label='**LOGIN**',
                 use_container_width=True,
                 key='login_submit_btn')
-            verse, book = bible_verse()
+            verse, book = bible_verse(num)
             st.markdown(
                 f"""
                 <p style='text-align: left; color: #ccc; font-size: 14px; margin-top: 5px;'>

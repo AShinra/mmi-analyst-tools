@@ -84,28 +84,16 @@ def gradient_line():
     """,
     unsafe_allow_html=True)
 
-def bible_verse():
-
-    num = random.randint(1, 5)
+def bible_verse(num):
 
     bible_dict = {
         1:['Whatever you do, work at it with all your heart, as working for the Lord, not for human masters..', 'Colossians 3:23'],
         2:['For the Lord gives wisdom; from His mouth come knowledge and understanding.', 'Proverbs 2:6'],
         3:['If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault, and it will be given to you.', 'James 1:5'],
         4:['Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight.', 'Proverbs 3:5–6'],
-        5:['I will instruct you and teach you in the way you should go; I will counsel you with My loving eye on you.', 'Psalm 32:8']
+        5:['I will instruct you and teach you in the way you should go; I will counsel you with My loving eye on you.', 'Psalm 32:8'],
+        6:['So whether you eat or drink or whatever you do, do it all for the glory of God.', '1 Corinthians 10:31']
     }
 
-    verse, book = bible_dict[num]
-
-    st.markdown(
-    f"""
-    <p style='text-align: left; color: #ccc; font-size: 14px; margin-top: 5px;'>
-        “{verse}”<br>
-        <i>— {book}</i>
-    </p>
-    """,
-    unsafe_allow_html=True
-)
-
+    return bible_dict[num]
 
