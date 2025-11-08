@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 from argon2 import PasswordHasher
-from common import has_upper_and_number, page_title, get_collection
+from common import has_upper_and_number, page_title, get_collection, gradient_line
 
 def add_user():
     # add user
@@ -120,25 +120,34 @@ def edit_user():
 
 
 def user_management():
-    st.title('User Management')
+    st.header('👥User Management')
+    gradient_line()
     cola, colb = st.columns([1, 1])
     with cola:
-        tr_select = option_menu(
-            menu_title=None,
-            options=['Add', 'Modify'],
-            icons=['plus-lg', 'pencil'],
-            orientation='horizontal',
-            styles={
-                "nav-link": {
-                    "font-size": "16px",
-                    "text-align": "center",
-                    "margin": "0px 10px",
-                    "--hover-color": "#262730"},
-                "nav-link-selected": {
-                    "background-color": "#676b6ee6",  # highlight color
-                    "font-weight": "bold"}})
+        tab1, tab2 = st.tabs(['Add', 'Modify'])
+    
+        with tab1:
+            add_user()
+        with tab2:
+            edit_user()
 
-    if tr_select=='Add':
-        add_user()
-    elif tr_select=='Modify':
-        edit_user()
+    # with cola:
+    #     tr_select = option_menu(
+    #         menu_title=None,
+    #         options=['Add', 'Modify'],
+    #         icons=['plus-lg', 'pencil'],
+    #         orientation='horizontal',
+    #         styles={
+    #             "nav-link": {
+    #                 "font-size": "16px",
+    #                 "text-align": "center",
+    #                 "margin": "0px 10px",
+    #                 "--hover-color": "#262730"},
+    #             "nav-link-selected": {
+    #                 "background-color": "#676b6ee6",  # highlight color
+    #                 "font-weight": "bold"}})
+
+    # if tr_select=='Add':
+    #     add_user()
+    # elif tr_select=='Modify':
+    #     edit_user()

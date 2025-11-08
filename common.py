@@ -73,4 +73,14 @@ def page_title(title):
     
     st.title(f":blue[{title}]")
 
+def gradient_line():
+    st.markdown("""
+    <div style='height: 4px; 
+                background: linear-gradient(90deg, #5f27cd, #48dbfb, #10ac84);
+                border-radius: 10px; 
+                margin-bottom: 20px;'>
+    </div>
+    """,
+    unsafe_allow_html=True)
+
 

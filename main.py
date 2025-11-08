@@ -1,8 +1,7 @@
 import streamlit as st
-from common import get_logo, get_collection
+from common import get_logo, get_collection, gradient_line
 from argon2 import PasswordHasher
 from home import main
-
 
 
 if __name__ == '__main__':
@@ -25,13 +24,37 @@ if __name__ == '__main__':
     st.markdown("""<style>.stSidebar.st-emotion-cache-1legitb {background-color: black;}</style>""", unsafe_allow_html=True)
     
     # Global Title
+
     st.markdown(
     """
-    <h2 style='text-align: center; color: white; background-color:#262730; padding:10px; border-radius:10px;'>
+    <h2 style='text-align: center; 
+               color: white; 
+               background: linear-gradient(90deg, #262730 0%, #3a3b40 40%, #ffffff 100%);
+               padding: 10px; 
+               border-radius: 10px;'>
         📊 MMI Analytics & Reporting System
     </h2>
     """,
     unsafe_allow_html=True)
+
+    # st.markdown(
+    # """
+    # <h2 style='text-align: center; color: white; background-color:#262730; padding:10px; border-radius:10px;'>
+    #     📊 MMI Analytics & Reporting System
+    # </h2>
+    # """,
+    # unsafe_allow_html=True)
+
+    gradient_line()
+
+    st.markdown(
+    """
+    <p style='text-align: center; color: #ccc; font-size: 14px; margin-top: -10px;'>
+        Empowering insights through intelligent analytics
+    </p>
+    """,
+    unsafe_allow_html=True
+)
 
 
     # try:

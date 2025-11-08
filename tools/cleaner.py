@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
-from common import get_tier_collection
+from common import get_tier_collection, gradient_line
 
 
 @st.cache_data
@@ -66,6 +66,7 @@ def cleaner():
     col11, col12 = st.columns([1,2])
     with col11:
         st.header('🗄️File Handler')
+        gradient_line()
         with st.container(border=True):
             raw_file = st.file_uploader(
                 label='Upload Raw File',
@@ -89,6 +90,7 @@ def cleaner():
             if out_fname:
                 with col12:
                     st.header('🛠️Tools')
+                    gradient_line()
                     col1, col2, col3 = st.columns(3)
                     with col1:
                         with st.container(border=True):
