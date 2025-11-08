@@ -69,8 +69,8 @@ def basic_report():
                                 )
 
                                 if main_category_select != []:
-                                    for i in main_category_select:
-                                        initial_categories.remove(i)
+                                    for category in main_category_select:
+                                        initial_categories.remove(category)
                         
                         with cola3:
                             with st.container(border=True):
@@ -80,8 +80,8 @@ def basic_report():
                                 )
 
                                 if competitor_category_select != []:
-                                    for i in competitor_category_select:
-                                        initial_categories.remove(i)
+                                    for category in competitor_category_select:
+                                        initial_categories.remove(category)
                         
                         with cola4:
                             with st.container(border=True):
