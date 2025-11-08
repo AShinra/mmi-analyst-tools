@@ -4,10 +4,14 @@ from argon2 import PasswordHasher
 from home import main
 import random
 
+@st.cache_data
+def get_random_number():
+    return random.randint(1, 6)
+
 
 if __name__ == '__main__':
 
-    num = random.randint(1, 6)
+    num = get_random_number
 
     hide_streamlit_style = """<style>
     ._profileContainer_gzau3_63{display: none;}
