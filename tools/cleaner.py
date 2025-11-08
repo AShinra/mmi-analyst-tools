@@ -53,9 +53,7 @@ def get_tier(df, collection):
         if result:
             df.loc[index, 'TIER'] = result['tier']
         
-    return df    
-
-
+    return df
 
 
 
@@ -91,7 +89,7 @@ def cleaner():
             if out_fname:
                 with col12:
                     st.header('🛠️Tools')
-                    col1, col2, col3, col4 = st.columns(4)
+                    col1, col2, col3 = st.columns(3)
                     with col1:
                         with st.container(border=True):
                             st.subheader('Duplicates')
@@ -134,33 +132,31 @@ def cleaner():
                             if cb_tier:
                                 task_status += 1
                                 collection = get_tier_collection()
-                            # documents = collection.find()
-                            # for document in documents:
-                            #     st.write(document)
+                            
                            
 
 
                     
-                    with col4:
-                        with st.container(border=True):
-                            st.subheader('Favorability')
+                    # with col4:
+                    #     with st.container(border=True):
+                    #         st.subheader('Favorability')
                     
-                    cola, colb, colc, cold = st.columns(4)
-                    with cola:
-                        with st.container(border=True):
-                            st.subheader('Function5')
+                    # cola, colb, colc, cold = st.columns(4)
+                    # with cola:
+                    #     with st.container(border=True):
+                    #         st.subheader('Function5')
                     
-                    with colb:
-                        with st.container(border=True):
-                            st.subheader('Function6')
+                    # with colb:
+                    #     with st.container(border=True):
+                    #         st.subheader('Function6')
                     
-                    with colc:
-                        with st.container(border=True):
-                            st.subheader('Function7')
+                    # with colc:
+                    #     with st.container(border=True):
+                    #         st.subheader('Function7')
                     
-                    with cold:
-                        with st.container(border=True):
-                            st.subheader('Function8')
+                    # with cold:
+                    #     with st.container(border=True):
+                    #         st.subheader('Function8')
 
     
 
