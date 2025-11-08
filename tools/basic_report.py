@@ -1,7 +1,11 @@
 import streamlit as st
 import calendar
 from datetime import date, datetime
+import pandas as pd
 
+st.cache_data()
+def get_categories(df):
+    return sorted(list(set(df['Category'].to_list())))
 
 def basic_report():
     
@@ -13,7 +17,12 @@ def basic_report():
                 label='Upload Cleaned File',
                 type=['xls', 'xlsx'])
             
+                        
             if raw_file:
+
+                df = pd.read_excel(raw_file)            
+                initial_categories = get_categories(df)
+
                 with col11:
                     with st.container(border=True):
                         out_fname = st.text_input(label='Output Filename')
@@ -56,21 +65,29 @@ def basic_report():
                             with st.container(border=True):
                                 main_category_select = st.multiselect(
                                     label='Main Category',
-                                    options=[]
+                                    options=initial_categories
                                 )
+
+                                if main_category_select != []:
+                                    for i in main_category_select:
+                                        initial_categories.remove(i)
                         
                         with cola3:
                             with st.container(border=True):
                                 competitor_category_select = st.multiselect(
                                     label='Comeptitor Category',
-                                    options=[]
+                                    options=initial_categories
                                 )
+
+                                if competitor_category_select != []:
+                                    for i in competitor_category_select:
+                                        initial_categories.remove(i)
                         
                         with cola4:
                             with st.container(border=True):
                                 industry_category_select = st.multiselect(
                                     label='Industry Category',
-                                    options=[]
+                                    options=initial_categories
                                 )
                         
                         colb1, colb2, colb3, col44 = st.columns(4)
