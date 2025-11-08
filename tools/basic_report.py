@@ -118,7 +118,7 @@ def basic_report():
                                         label='Share of Voice')
                                 
                         
-                        if main_category_select or competitor_category_select:
+                        if report_client and (main_category_select or competitor_category_select):
                             btn_create_br = st.button(
                                 label='Create Report'
                             )
