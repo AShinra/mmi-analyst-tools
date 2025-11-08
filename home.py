@@ -6,6 +6,7 @@ from common import get_client
 # from tracking_reports import tracking_reports
 from users_management import user_management
 from tools.cleaner import cleaner
+from tools.basic_report import basic_report
 
 
 def main(fname, rights):
@@ -32,8 +33,8 @@ def main(fname, rights):
         if selected=='Report Tools':
             sub_selected = option_menu(
                 menu_title=None,
-                options=['Cleaner'],
-                icons=['magic']
+                options=['Cleaner', 'Report'],
+                icons=['magic', 'file-earmark-spreadsheet-fill']
         )
         
         if selected=='Settings':
@@ -52,6 +53,8 @@ def main(fname, rights):
     if sub_selected=='Cleaner':
         cleaner()
     
+    if sub_selected=='Report':
+        basic_report()
 
 
         
