@@ -3,6 +3,7 @@ import calendar
 from datetime import date, datetime
 import pandas as pd
 from common import gradient_line
+from sheets.client import client_single, client_multiple
 
 st.cache_data()
 def get_categories(df):
@@ -100,7 +101,7 @@ def basic_report():
                                 with colb11:
                                     main_sheet_option = st.radio(
                                         label='Main Sheet',
-                                        options=['Single', 'Mulitple'])
+                                        options=['Single', 'Multiple'])
 
                                 with colb12:
                                     competitor_sheet_option = st.radio(
@@ -122,3 +123,10 @@ def basic_report():
                             btn_create_br = st.button(
                                 label='Create Report'
                             )
+
+                            if btn_create_br:
+                                if main_sheet_option=='Single':
+                                    client_single(df, main_category_select)
+                                elif main_sheet_option=='Multiple':
+                                    client_multiple(df, main_category_select)
+                                
