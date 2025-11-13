@@ -3,7 +3,7 @@ import calendar
 from datetime import date, datetime
 import pandas as pd
 from common import gradient_line
-from sheets.client import client_single, client_multiple
+from tools.pivot import pivot_sheet, tonality_sheets, daily_statistics, media_statistics, share_of_voice
 
 st.cache_data()
 def get_categories(df):
@@ -106,7 +106,10 @@ def basic_report():
                                 with colb12:
                                     competitor_sheet_option = st.radio(
                                         label='Competitor Sheet',
-                                        options=['Single', 'Mulitple'])
+                                        options=['Single', 'Multiple'])
+                                    
+                                st.subheader('Additional Sheets')
+                                cb_tonality_sheets = st.checkbox(label='Tonality Sheets')
                             
                             with colb2:
                                 st.subheader('Chart Select')
@@ -121,12 +124,74 @@ def basic_report():
                         
                         if report_client and (main_category_select or competitor_category_select):
                             btn_create_br = st.button(
-                                label='Create Report'
-                            )
+                                label='Create Report')
 
                             if btn_create_br:
-                                if main_sheet_option=='Single':
-                                    client_single(df, main_category_select)
-                                elif main_sheet_option=='Multiple':
-                                    client_multiple(df, main_category_select)
+                                # gather main sheet data
+                                if main_category_select:
+                                    st.write('Main')
+                                    main_data_frame_set = pivot_sheet(
+                                        data_frame=df,
+                                        category=main_category_select)
+                                    
+                                    if main_sheet_option=='Single':
+                                        st.dataframe(pd.concat(main_data_frame_set))
+                                    elif main_sheet_option=='Multiple':
+                                        for data_frame_set in main_data_frame_set:
+                                            st.dataframe(data_frame_set)
                                 
+                                # gather competitor sheet data
+                                if competitor_category_select:
+                                    st.write('Competitor')
+                                    competitor_data_frame_set = pivot_sheet(
+                                        data_frame=df,
+                                        category=competitor_category_select)
+                                    
+                                    if competitor_sheet_option=='Single':
+                                        st.dataframe(pd.concat(competitor_data_frame_set))
+                                    elif competitor_sheet_option=='Multiple':
+                                        for data_frame_set in competitor_data_frame_set:
+                                            st.dataframe(data_frame_set)
+                                
+                                # gather industry sheet data
+                                if industry_category_select:
+                                    st.write('Industry')
+                                    industry_data_frame_set = pivot_sheet(
+                                        data_frame=df,
+                                        category=industry_category_select)
+                                    
+                                    st.dataframe(pd.concat(industry_data_frame_set))
+                                
+                                if cb_tonality_sheets:
+                                    st.write('Tonality Sheets')
+                                    tone_data_frame_set = tonality_sheets(
+                                        data_frame=df,
+                                        category=main_category_select)
+                                    
+                                    for tone, data_frame_set in tone_data_frame_set.items():
+                                        st.write(tone)
+                                        st.dataframe(data_frame_set)
+
+                                if daily_stats:
+                                    st.write('Daily Statistics')
+                                    daily_stats_dict = daily_statistics(
+                                        data_frame=df,
+                                        category=main_category_select)
+                                    
+                                    for k, v in daily_stats_dict.items():
+                                        st.write(k)
+                                        st.dataframe(v)
+
+                                if media_stats:
+                                    st.write('Media Statistics')
+                                    media_statistics(
+                                        data_frame=df,
+                                        category=main_category_select)
+                                
+                                if share_voice:
+                                    st.write('Share of Voice')
+                                    share_of_voice(
+                                        data_frame=df,
+                                        category=main_category_select + competitor_category_select)
+                                    
+                                    
