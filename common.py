@@ -4,6 +4,12 @@ from PIL import Image
 import requests
 from io import BytesIO
 import random
+from openpyxl import Workbook
+import pandas as pd
+
+# font list
+font_list = ['Arial', 'Segoe UI', 'Helvetica', 'Times New Roman', 'Comic Sans MS', 'Fira Code', 'Verdana', 'Source Code Pro', 'Calibri', 'Playfair']
+font_list = sorted(font_list)
 
 @st.cache_resource
 def get_client():
@@ -97,3 +103,170 @@ def bible_verse(num):
 
     return bible_dict[num]
 
+
+def create_workbook(output_filename:str):
+    '''
+    output_filename ==>> filename to be used in creating an excel file
+    '''
+
+    wb = Workbook()    
+    wb.save(f'{output_filename}.xlsx')
+
+
+def header_settings():
+    '''
+    Formatting of sheet headers\n\n
+    0 ==>> header font name (default Arial)\n
+    1 ==>> header font size (default 24)\n
+    2 ==>> header font color (default #0066cc)\n
+    3 ==>> bold (default True)\n
+    4 ==>> itallic (default False)
+    '''
+    header_settings = []
+    st.markdown('#### Headers (Font Defaults)')
+    col1, col2, col3 = st.columns([2,1,1])
+    with col1:
+        header_font_name = st.selectbox(
+             label='Name',
+             options=font_list,
+             placeholder='Arial',
+             key='header_font_name')
+        
+        default_value = 24
+        header_font_size = st.selectbox(
+            label='Size',
+            options=[i for i in range(1, 100)],
+            index=default_value - 1,
+            key='header_font_size')
+
+    with col2:
+        header_font_color = st.color_picker(
+             label='Color',
+             value='#0066cc',
+             key='header_font_color')
+        header_font_color = header_font_color.split('#')[1]
+        
+    with col3:
+        header_bold = st.checkbox(
+              label='Bold',
+              key='header_bold',
+              value=True)
+        header_italic = st.checkbox(
+            label='Italic',
+            key='header_italic')
+        
+    header_settings.append(header_font_name)
+    header_settings.append(header_font_size)
+    header_settings.append(header_font_color)
+    header_settings.append(header_bold)
+    header_settings.append(header_italic)
+    
+    return header_settings
+        
+
+def subheader_settings():
+    '''
+    Formatting of sheet subheaders\n\n
+    0 ==>> subheader font name (default Arial)\n
+    1 ==>> subheader font size (default 11)\n
+    2 ==>> subheader font color (default #0066cc)\n
+    3 ==>> bold (default True)\n
+    4 ==>> itallic (default False)
+    '''
+    subheader_settings = []
+
+    st.markdown('#### Sub Headers (Defaults)')
+    col1, col2, col3 = st.columns([2,1,1])
+    with col1:
+        subheader_font_name = st.selectbox(
+             label='Name',
+             options=font_list,
+             placeholder='Arial',
+             key='subheader_font_name')
+        
+        default_value = 11
+        subheader_font_size = st.selectbox(
+            label='Size',
+            options=[i for i in range(1, 100)],
+            index=default_value - 1,
+            key='subheader_font_size')
+        
+    with col2:
+        subheader_font_color = st.color_picker(
+             label='Color',
+             value='#0066cc',
+             key='subheader_font_color')
+        subheader_font_color = subheader_font_color.split('#')[1]
+        
+    with col3:
+        subheader_bold = st.checkbox(
+            label='Bold',
+            value=True,
+            key='subheader_bold')
+        
+        subheader_italic = st.checkbox(
+            label='Italic',
+            value=False,
+            key='subheader_italic')
+        
+    subheader_settings.append(subheader_font_name)
+    subheader_settings.append(subheader_font_size)
+    subheader_settings.append(subheader_font_color)
+    subheader_settings.append(subheader_bold)
+    subheader_settings.append(subheader_italic)
+    
+    return subheader_settings
+
+
+def sheet_title_settings():
+    '''
+    Formatting of sheet subheaders\n\n
+    0 ==>> sheet title font name (default Arial)\n
+    1 ==>> sheet title font size (default 11)\n
+    2 ==>> sheet title font color (default #0066cc)\n
+    3 ==>> bold (default True)\n
+    4 ==>> itallic (default False)
+    '''
+    sheettitle_settings = []
+
+    st.markdown('#### Sub Headers (Defaults)')
+    col1, col2, col3 = st.columns([2,1,1])
+    with col1:
+        sheettitle_font_name = st.selectbox(
+             label='Name',
+             options=font_list,
+             placeholder='Arial',
+             key='sheettitle_font_name')
+        
+        default_value = 11
+        sheettitle_font_size = st.selectbox(
+            label='Size',
+            options=[i for i in range(1, 100)],
+            index=default_value - 1,
+            key='sheettitle_font_size')
+        
+    with col2:
+        sheettitle_font_color = st.color_picker(
+             label='Color',
+             value='#0066cc',
+             key='sheettitle_font_color')
+        sheetitle_font_color = sheettitle_font_color.split('#')[1]
+        
+    with col3:
+        sheettitle_bold = st.checkbox(
+            label='Bold',
+            value=True,
+            key='sheettitle_bold')
+        
+        sheettitle_italic = st.checkbox(
+            label='Italic',
+            value=False,
+            key='sheettitle_italic')
+        
+    sheettitle_settings.append(sheettitle_font_name)
+    sheettitle_settings.append(sheettitle_font_size)
+    sheettitle_settings.append(sheetitle_font_color)
+    sheettitle_settings.append(sheettitle_bold)
+    sheettitle_settings.append(sheettitle_italic)
+    
+    return sheettitle_settings
