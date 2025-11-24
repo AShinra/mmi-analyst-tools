@@ -123,7 +123,7 @@ def header_settings():
     4 ==>> itallic (default False)
     '''
     header_settings = []
-    st.markdown('#### Headers (Font Defaults)')
+    st.markdown('#### Headers (Defaults)')
     col1, col2, col3 = st.columns([2,1,1])
     with col1:
         header_font_name = st.selectbox(
@@ -229,7 +229,7 @@ def sheet_title_settings():
     '''
     sheettitle_settings = []
 
-    st.markdown('#### Sub Headers (Defaults)')
+    st.markdown('#### Title (Defaults)')
     col1, col2, col3 = st.columns([2,1,1])
     with col1:
         sheettitle_font_name = st.selectbox(
@@ -265,8 +265,61 @@ def sheet_title_settings():
         
     sheettitle_settings.append(sheettitle_font_name)
     sheettitle_settings.append(sheettitle_font_size)
-    sheettitle_settings.append(sheetitle_font_color)
+    sheettitle_settings.append(sheettitle_font_color)
     sheettitle_settings.append(sheettitle_bold)
     sheettitle_settings.append(sheettitle_italic)
     
     return sheettitle_settings
+
+def sheet_table_settings():
+    '''
+    Formatting of sheet subheaders\n\n
+    0 ==>> sheet title font name (default Arial)\n
+    1 ==>> sheet title font size (default 11)\n
+    2 ==>> sheet title font color (default #0066cc)\n
+    3 ==>> bold (default True)\n
+    4 ==>> itallic (default False)
+    '''
+    table_settings = []
+
+    st.markdown('#### Table (Defaults)')
+    col1, col2, col3 = st.columns([2,1,1])
+    with col1:
+        table_font_name = st.selectbox(
+             label='Name',
+             options=font_list,
+             placeholder='Arial',
+             key='sheettitle_font_name')
+        
+        default_value = 11
+        table_font_size = st.selectbox(
+            label='Size',
+            options=[i for i in range(1, 100)],
+            index=default_value - 1,
+            key='sheettitle_font_size')
+        
+    with col2:
+        table_font_color = st.color_picker(
+             label='Color',
+             value='#0066cc',
+             key='sheettitle_font_color')
+        table_font_color = table_font_color.split('#')[1]
+        
+    with col3:
+        table_bold = st.checkbox(
+            label='Bold',
+            value=True,
+            key='sheettitle_bold')
+        
+        table_italic = st.checkbox(
+            label='Italic',
+            value=False,
+            key='sheettitle_italic')
+        
+    table_settings.append(table_font_name)
+    table_settings.append(table_font_size)
+    table_settings.append(table_font_color)
+    table_settings.append(table_bold)
+    table_settings.append(table_italic)
+    
+    return table_settings

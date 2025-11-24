@@ -148,17 +148,15 @@ def basic_report():
                                 with st.container(border=True):
                                     cb_tonality_sheets = st.checkbox(label='Tonality Sheets')
 
-                                st.subheader('Sheet Settings')
+                                # st.subheader('Sheet Settings')
                                 gradient_line()
-                                tab1, tab2, tab3 = st.tabs(['Header', 'Sub-Header', 'Title'])
-                                with tab1:
-                                    with st.container(border=True):
+                                with st.popover('Sheet Settings', width='stretch'):
+                                    tab1, tab2, tab3 = st.tabs(['Header', 'Sub-Header', 'Title'])
+                                    with tab1:
                                         header_font_name, header_font_size, header_font_color, header_bold, header_italic = header_settings()
-                                with tab2:
-                                    with st.container(border=True):
+                                    with tab2:
                                         subheader_font_name, subheader_font_size, subheader_font_color, subheader_bold, subheader_italic = subheader_settings()
-                                with tab3:
-                                    with st.container(border=True):
+                                    with tab3:
                                         sheettitle_font_name, sheettitle_font_size, sheettitle_font_color, sheettitle_bold, sheettitle_italic = sheet_title_settings()
                                     
 
