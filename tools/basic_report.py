@@ -31,6 +31,7 @@ def basic_report():
             if raw_file:
 
                 df = pd.read_excel(raw_file)
+                df['Ad Value'] = df['Ad Value'].astype(str)
                 df['Ad Value'] = df['Ad Value'].str.replace(',', '')
                 df['Ad Value'] = df['Ad Value'].astype(float)
 
