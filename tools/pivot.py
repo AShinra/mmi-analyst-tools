@@ -20,11 +20,19 @@ def pivot_sheet(data_frame, category):
     for bucket in bucket_list:
         bucket_df = filtered_df.query('Bucket==@bucket')
 
+        _index = ['Bucket', 'Raw Date', 'Media Type', 'Article Class', 'Publication', 'Title', 'Section', 'Focus', 'Tonality', 'Length', 'Ad Value', 'AVE']
+
+        if 'Focus_Custom' in bucket_df.columns:
+            _index[7] = 'Focus_Custom'
+        
+        if 'Tonality_Custom' in bucket_df.columns:
+            _index[8] = 'Tonality_Custom'
+        
         # create pivot table based from the bucket
         pivottable = pd.pivot_table(
             data=bucket_df,
             values='Article ID',
-            index=['Bucket', 'Raw Date', 'Media Type', 'Article Class', 'Publication', 'Title', 'Section', 'Length', 'Ad Value', 'AVE'],
+            index=_index,
             aggfunc='count',
             margins=True,
             margins_name=f'{bucket} Total',

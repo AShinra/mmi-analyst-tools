@@ -281,7 +281,7 @@ def basic_report():
                                         start_row+=34
                                         
                                 if media_stats:
-                                    st.write('Media Statistics')
+                                    # st.write('Media Statistics')
                                     data_frame_dict = media_statistics(
                                         data_frame=df,
                                         category=main_category_select)
@@ -300,7 +300,7 @@ def basic_report():
                                         start_row+=25
                                 
                                 if share_voice:
-                                    st.write('Share of Voice')
+                                    # st.write('Share of Voice')
                                     data_frame_set = share_of_voice(
                                         data_frame=df,
                                         category=main_category_select + competitor_category_select)

@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from io import BytesIO
 from common import get_tier_collection, gradient_line
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 @st.cache_data
@@ -57,6 +58,48 @@ def get_tier(df, collection):
     return df
 
 
+def add_tonality(df):
+
+    df['Hit_Sentences'] = ''
+    df['Tonality_Custom'] = ''
+
+    analyzer = SentimentIntensityAnalyzer()
+
+    for index, row in df.iterrows():
+        
+        keyword_str = str(row.get('Keywords', '') or '')
+        keyword_list = [s.strip() for s in keyword_str.split(",") if s.strip()]
+
+        content_str = str(row.get('Content', '') or '')
+        content_str_list = [s.strip() for s in content_str.split(".") if s.strip()]
+
+        title_str = str(row.get('Title', '') or '')
+
+        content_str_list.append(title_str)
+        
+        # get hit sentences
+        hit_sentences = []
+        for keyword in keyword_list:
+            for content in content_str_list:
+                if keyword.lower() in content.lower():
+                    if content not in hit_sentences:
+                        hit_sentences.append(content)
+        
+        df.at[index, 'Hit_Sentences'] = hit_sentences
+
+        hit_sentence = '. '.join(hit_sentences)
+    
+        tonality_score = analyzer.polarity_scores(hit_sentence)["compound"]
+        if tonality_score >= 0.05:
+            df.at[index, 'Tonality_Custom'] = "Positive"
+        elif tonality_score <= -0.1:
+            df.at[index, 'Tonality_Custom'] = "Negative"
+        else:
+            df.at[index, 'Tonality_Custom'] = "Neutral"
+
+    return df
+
+
 
 def cleaner():
     
@@ -66,7 +109,7 @@ def cleaner():
 
     col11, col12 = st.columns([1,2])
     with col11:
-        st.header('🗄️File Handler')
+        st.markdown('## 🗄️File Handler')
         gradient_line()
         with st.container(border=True):
             raw_file = st.file_uploader(
@@ -90,12 +133,12 @@ def cleaner():
 
             if out_fname:
                 with col12:
-                    st.header('🛠️Tools')
+                    st.markdown('## 🛠️Tools')
                     gradient_line()
                     col1, col2, col3 = st.columns(3)
                     with col1:
                         with st.container(border=True):
-                            st.subheader('Duplicates')
+                            st.markdown('### 🧾Duplicates')
                             cb_cleaner = st.checkbox(
                                 label='Remove Duplicates',
                                 help='Only the first occurrence will be retained')
@@ -111,7 +154,7 @@ def cleaner():
             
                     with col2:
                         with st.container(border=True):
-                            st.subheader('Focus')
+                            st.markdown('### 🔎Focus')
                             cb_focus = st.checkbox(
                                 label='Client Based',
                                 help='Creates a column that contains focus on client')
@@ -127,31 +170,31 @@ def cleaner():
                     
                     with col3:
                         with st.container(border=True):
-                            st.subheader('Tier')
+                            st.markdown('### 🧪Tier')
                             cb_tier = st.checkbox(
-                                label='Add TIER column'
-                            )
+                                label='Add TIER column')
 
                             if cb_tier:
                                 task_status += 1
                                 collection = get_tier_collection()
+
+                    col1a, col2a, col3a = st.columns(3)
+                    with col1a:
+                        with st.container(border=True):
+                            st.markdown('### 🎶Tonality')
+                            cb_tonality = st.checkbox(
+                                label='Add Tonality column')
                             
-                           
+                            if cb_tonality:
+                                task_status += 1
 
-
+                    with col2a:
+                        with st.container(border=True):
+                            st.markdown('### Function5')
                     
-                    # with col4:
-                    #     with st.container(border=True):
-                    #         st.subheader('Favorability')
-                    
-                    # cola, colb, colc, cold = st.columns(4)
-                    # with cola:
-                    #     with st.container(border=True):
-                    #         st.subheader('Function5')
-                    
-                    # with colb:
-                    #     with st.container(border=True):
-                    #         st.subheader('Function6')
+                    with col3a:
+                        with st.container(border=True):
+                            st.markdown('### Function6')
                     
                     # with colc:
                     #     with st.container(border=True):
@@ -185,6 +228,11 @@ def cleaner():
                         cleaned_df3 = get_tier(cleaned_df2, collection)
                     except:
                         cleaned_df3 = cleaned_df2
+                    
+                    try:
+                        cleaned_df4 = add_tonality(cleaned_df3)
+                    except:
+                        cleaned_df4 = cleaned_df3
 
                     output = BytesIO()
                     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:

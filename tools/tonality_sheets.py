@@ -16,13 +16,26 @@ def tonality_sheets(data_frame, category):
     bucket_list = sorted(list(set(bucket_list)))
 
     # get tone list from filtered df
-    tonality_list = list(set(filtered_df['Tonality'].to_list()))
+    if 'Tonality_Custom' in filtered_df.columns:
+        tonality_list = list(set(filtered_df['Tonality_Custom'].to_list()))
+    else:
+        tonality_list = list(set(filtered_df['Tonality'].to_list()))
    
     tone_data_frame_set = {}
 
     for tonality in tonality_list:
         data_frame_set = []
-        tonality_df = filtered_df.query('Tonality==@tonality')
+
+        _index = ['Bucket', 'Raw Date', 'Media Type', 'Article Class', 'Publication', 'Title', 'Section', 'Focus', 'Tonality', 'Length', 'Ad Value', 'AVE']
+
+        if "Tonality_Custom" in filtered_df.columns:
+            tonality_df = filtered_df.query('Tonality_Custom==@tonality')
+            _index[8] = 'Tonality_Custom'
+        else:
+            tonality_df = filtered_df.query('Tonality==@tonality')
+        
+        if "Focus_Custom" in filtered_df.columns:
+            _index[7] = 'Focus_Custom'
 
         for bucket in bucket_list:
             bucket_df = tonality_df.query('Bucket==@bucket')
@@ -32,7 +45,7 @@ def tonality_sheets(data_frame, category):
                 pivottable = pd.pivot_table(
                     data=bucket_df,
                     values='Article ID',
-                    index=['Bucket', 'Raw Date', 'Media Type', 'Article Class', 'Publication', 'Title', 'Section', 'Tonality', 'Length', 'Ad Value', 'AVE'],
+                    index=_index,
                     aggfunc='count',
                     margins=True,
                     margins_name=f'{bucket} Total',
