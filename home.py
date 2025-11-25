@@ -9,7 +9,7 @@ from tools.cleaner import cleaner
 from tools.basic_report import basic_report
 
 
-def main(fname, rights):
+def main_start(fname, rights):
 
     with st.sidebar:
         if rights=='admin':

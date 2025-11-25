@@ -1,7 +1,7 @@
 import streamlit as st
 from common import get_logo, get_collection, gradient_line, bible_verse
 from argon2 import PasswordHasher
-from home import main
+from home import main_start
 import random
 
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     user_collection = get_collection('users_analysts')    
         
     if st.session_state.logged_in:
-        main(st.session_state.fname, st.session_state.rights)
+        main_start(st.session_state.fname, st.session_state.rights)
         with st.sidebar:
             if st.button('**Log Out**', use_container_width=True):
                 st.session_state.logged_in = False
